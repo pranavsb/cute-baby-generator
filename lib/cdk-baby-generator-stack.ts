@@ -20,6 +20,10 @@ export class CdkBabyGeneratorStack extends cdk.Stack {
       code: Code.fromAsset(join(__dirname, '..', 'dist', 'index.zip')),
       handler: 'index.handler',
       runtime: Runtime.NODEJS_20_X,
+      timeout: cdk.Duration.seconds(900),
+      environment: {
+        OPENAI_API_KEY: process.env.OPENAI_API_KEY ?? ''
+      }
     });
 
     const lambdaIntegration = new HttpLambdaIntegration('CuteBabyLambdaIntegration', cuteBabyImageLambda);
