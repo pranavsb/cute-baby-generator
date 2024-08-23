@@ -5,6 +5,14 @@ export const handler = async (event: APIGatewayEvent, context: Context): Promise
     console.log(`Event: ${JSON.stringify(event)}`);
     console.log(`Context: ${JSON.stringify(context)}`);
 
+    if (Math.random() < 0.9) {
+        return {
+            statusCode: 200,
+            body: JSON.stringify({
+                message: 'no image for you! try again, you have a 10% chance of getting an image',
+            }),
+        }
+    }
     let image_url = '';
     try {
         const openai = new OpenAI();
