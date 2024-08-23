@@ -1,8 +1,6 @@
-# Welcome to your CDK TypeScript project
+### Cute Baby Generator
 
-This is a blank project for CDK development with TypeScript.
-
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+Using the power of Lambda and DALL-E to generate the cutest baby pictures!
 
 ## Useful commands
 
