@@ -2,11 +2,11 @@
 
 Using the power of Lambda and DALL-E to generate the cutest baby pictures!
 
-## Useful commands
+## Getting started
 
-* `npm run build`   compile typescript to js
-* `npm run watch`   watch for changes and compile
-* `npm run test`    perform the jest unit tests
-* `npx cdk deploy`  deploy this stack to your default AWS account/region
-* `npx cdk diff`    compare deployed stack with current state
-* `npx cdk synth`   emits the synthesized CloudFormation template
+* Grab an OpenAI API key [here](https://platform.openai.com/api-keys)
+* Add it to your env vars `export OPENAI_API_KEY=<YOUR KEY HERE>`
+* `npm run build`
+* `cdk synth`
+* `cdk deploy`
+* Hit your `${API_gateway_endpoint}/v1/get-cute-baby` and enjoy cute baby pictures!
