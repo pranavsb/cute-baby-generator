@@ -29,5 +29,14 @@ export class CdkBabyGeneratorStack extends cdk.Stack {
       methods: [ HttpMethod.GET ],
       integration: lambdaIntegration
     });
+
+    cuteBabyApi.addStage('v1', {
+      stageName: 'v1',
+      autoDeploy: true,
+      throttle: {
+        burstLimit: 10,
+        rateLimit: 3
+      }
+    });
   }
 }
