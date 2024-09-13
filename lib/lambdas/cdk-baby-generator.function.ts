@@ -50,7 +50,9 @@ function generatePrompt(event: APIGatewayEvent): string {
     if (Math.random() < 0.25) {
         prompts = prompts.concat(smallAndStructured);
     }
-
+    
+    const final_prompt = prompts.join(',');
+    console.log(`Using prompt: ${final_prompt}`);
     return prompts.join(',');
 }
 
@@ -83,7 +85,7 @@ export const handler = async (event: APIGatewayEvent, context: Context): Promise
             }),
         }
     }
-    
+    console.log(`Got image URL from OpenAI: ${image_url}`);
     return {
         statusCode: 200,
         body: JSON.stringify({
