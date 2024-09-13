@@ -36,7 +36,7 @@ const smallAndStructured = ['ornate', 'delicate', 'neat', 'precise',
 ]
 
 function generatePrompt(event: APIGatewayEvent): string {
-    const prompts: string[] = [];
+    let prompts: string[] = [];
 
     // 1% chance of terrible photos
     if (Math.random() < 0.99) {
@@ -46,6 +46,10 @@ function generatePrompt(event: APIGatewayEvent): string {
     prompts.push(pickRandomProp(babyPrompts));
     prompts.push(pickRandomProp(lighting));
     prompts.push(pickRandomProp(styleSuffixes));
+
+    if (Math.random() < 0.25) {
+        prompts = prompts.concat(smallAndStructured);
+    }
 
     return prompts.join(',');
 }
