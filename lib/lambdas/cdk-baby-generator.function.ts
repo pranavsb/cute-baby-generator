@@ -9,7 +9,7 @@ const babyPrompts = {
     dog: 'a cute baby crawling in a blue onesie, next to a german shephard dog watching over it, the dog is playing with an orange plastic bone toy, which the baby is intrigued by'
 }
 
-const styleSuffixes = {
+const stylePrompts = {
     photograph: 'photo, photograph, raw photo, analog photo, 4k, fujifilm photograph',
     painting: 'Rococo, 1730, late Baroque, Antoine Watteau',
     simpsons: 'in the style of The Simpsons, animated, early 2000s',
@@ -35,6 +35,8 @@ const smallAndStructured = ['ornate', 'delicate', 'neat', 'precise',
     'decorative'
 ]
 
+const html_content = '<>'
+
 function generatePrompt(event: APIGatewayEvent): string {
     let prompts: string[] = [];
 
@@ -45,20 +47,20 @@ function generatePrompt(event: APIGatewayEvent): string {
     
     prompts.push(pickRandomProp(babyPrompts));
     prompts.push(pickRandomProp(lighting));
-    prompts.push(pickRandomProp(styleSuffixes));
+    prompts.push(pickRandomProp(stylePrompts));
 
     if (Math.random() < 0.25) {
         prompts = prompts.concat(smallAndStructured);
     }
-    
+
     const final_prompt = prompts.join(',');
     console.log(`Using prompt: ${final_prompt}`);
     return prompts.join(',');
 }
 
 // https://stackoverflow.com/a/15106541
-function pickRandomProp(obj: Object) {
-    const keys = Object.keys(obj);
+function pickRandomProp(obj: { [key: string]: string; } ) {
+    const keys: string[] = Object.keys(obj);
     return obj[keys[keys.length * Math.random() << 0]];
 }
 
@@ -68,14 +70,15 @@ export const handler = async (event: APIGatewayEvent, context: Context): Promise
 
     let image_url = '';
     try {
-        const openai = new OpenAI();
-        const image = await openai.images.generate({
-            prompt: generatePrompt(event),
-            model: 'dall-e-3',
-            n: 1,
-            size: '1024x1024'
-        });
-        image_url = image?.data[0]?.url ?? '';
+        image_url = 'https://oaidalleapiprodscus.blob.core.windows.net/private/org-nr3WeWHwrFjVZ6mxQyermNsL/cute-baby-generator/img-XS7A6ebE8yVkmi4vDxdOjLRY.png?st=2024-09-15T00%3A08%3A12Z&se=2024-09-15T02%3A08%3A12Z&sp=r&sv=2024-08-04&sr=b&rscd=inline&rsct=image/png&skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-09-14T23%3A30%3A48Z&ske=2024-09-15T23%3A30%3A48Z&sks=b&skv=2024-08-04&sig=mIf19aq0mrQte7pq%2BmPLK6JrL1dglMMieNQKwfiGdsU%3D';
+        // const openai = new OpenAI();
+        // const image = await openai.images.generate({
+        //     prompt: generatePrompt(event),
+        //     model: 'dall-e-3',
+        //     n: 1,
+        //     size: '1024x1024'
+        // });
+        // image_url = image?.data[0]?.url ?? '';
     } catch (error) {
         console.log(`error calling OpenAI: ${error}`);
         return {
