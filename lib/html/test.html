@@ -1,0 +1,32 @@
+<!-- test HTML to experiment with changes before deploying them via Lambda -->
+<!-- For Nav. Never stop obsessing over cute babies - from P <3 -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cute babies!</title>
+    <style>
+        button {
+            background-color: #04AA6D;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+        }
+    </style>
+  </head>
+  <body>
+    <main>
+        <img src="https://www.educative.io/static/imgs/logos/logoMarkv2.png" alt="a cute baby!">
+        <!-- TODO replace with domain name when API gateway is hooked up -->
+        <a href="https://5librbk64e.execute-api.us-east-2.amazonaws.com/v1/get-cute-baby">
+            <button type="button">Generate cute baby!</button>
+        </a>
+    </main>
+  </body>
+</html>

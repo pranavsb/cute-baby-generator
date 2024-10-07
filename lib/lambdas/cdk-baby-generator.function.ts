@@ -35,7 +35,38 @@ const smallAndStructured = ['ornate', 'delicate', 'neat', 'precise',
     'decorative'
 ]
 
-const html_content = '<>'
+const html_content =
+`<!-- For Nav. Never stop obsessing over cute babies - from P <3 -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cute babies!</title>
+    <style>
+        button {
+            background-color: #04AA6D;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+        }
+    </style>
+  </head>
+  <body>
+    <main>
+        <img src="https://www.educative.io/static/imgs/logos/logoMarkv2.png" alt="a cute baby!">
+        <!-- TODO replace with domain name when API gateway is hooked up -->
+        <a href="https://cutebabygenerator.com">
+            <button type="button">Generate cute baby!</button>
+        </a>
+    </main>
+  </body>
+</html>`;
 
 function generatePrompt(event: APIGatewayEvent): string {
     let prompts: string[] = [];
@@ -66,7 +97,6 @@ function pickRandomProp(obj: { [key: string]: string; } ) {
 
 export const handler = async (event: APIGatewayEvent, context: Context): Promise<APIGatewayProxyResult> => {
     console.log(`Event: ${JSON.stringify(event)}`);
-    console.log(`Context: ${JSON.stringify(context)}`);
 
     let image_url = '';
     try {
@@ -91,9 +121,10 @@ export const handler = async (event: APIGatewayEvent, context: Context): Promise
     console.log(`Got image URL from OpenAI: ${image_url}`);
     return {
         statusCode: 200,
-        body: JSON.stringify({
-            message: image_url,
-        }),
+        body: html_content,
+        headers: {
+            "content-type": "text/html"
+        }
     };
     
 };

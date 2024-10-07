@@ -29,6 +29,12 @@ export class CdkBabyGeneratorStack extends cdk.Stack {
     const lambdaIntegration = new HttpLambdaIntegration('CuteBabyLambdaIntegration', cuteBabyImageLambda);
     
     cuteBabyApi.addRoutes({
+      path: '/',
+      methods: [ HttpMethod.GET ],
+      integration: lambdaIntegration
+    });
+
+    cuteBabyApi.addRoutes({
       path: '/get-cute-baby',
       methods: [ HttpMethod.GET ],
       integration: lambdaIntegration
