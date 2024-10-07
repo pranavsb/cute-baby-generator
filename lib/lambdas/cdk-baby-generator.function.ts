@@ -59,11 +59,14 @@ const html_content =
   </head>
   <body>
     <main>
+      <div style="text-align: center; padding: 5em;">
         <img src="https://www.educative.io/static/imgs/logos/logoMarkv2.png" alt="a cute baby!">
-        <!-- TODO replace with domain name when API gateway is hooked up -->
-        <a href="https://cutebabygenerator.com">
-            <button type="button">Generate cute baby!</button>
+      </div>
+      <div style="text-align: center; padding: 5em;">
+        <a href="https://cutebabygenerator.com"></a>
+          <button type="button">Generate cute baby!</button>
         </a>
+      </div>
     </main>
   </body>
 </html>`;
