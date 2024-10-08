@@ -59,7 +59,7 @@ const html_content_prefix =
   </head>
   <body>
     <main>
-      <div style="text-align: center; padding: 5em;">
+      <div style="text-align: center;">
         <img src="`;
 
 const html_content_suffix = `" alt="a cute baby!">
@@ -106,8 +106,10 @@ export const handler = async (event: APIGatewayEvent, context: Context): Promise
     let image_url = '';
     try {
         const openai = new OpenAI();
+        const prompt = generatePrompt(event);
+        console.log(`Using prompt: ${prompt}`);
         const image = await openai.images.generate({
-            prompt: generatePrompt(event),
+            prompt: prompt,
             model: 'dall-e-2',
             n: 1,
             size: '512x512',
