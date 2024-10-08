@@ -110,7 +110,7 @@ export const handler = async (event: APIGatewayEvent, context: Context): Promise
             prompt: generatePrompt(event),
             model: 'dall-e-3',
             n: 1,
-            size: '1024x1024'
+            size: '512x512',
         });
         image_url = image?.data[0]?.url ?? '';
     } catch (error) {
