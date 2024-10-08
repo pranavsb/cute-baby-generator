@@ -62,7 +62,7 @@ const html_content_prefix =
       <div style="text-align: center;">
         <img src="`;
 
-const html_content_suffix = `" alt="a cute baby!">
+const html_content_suffix = `" alt="a cute baby!" width="400" height="400">
       </div>
       <div style="text-align: center; padding: 5em;">
         <a href="https://cutebabygenerator.com">
