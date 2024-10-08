@@ -108,7 +108,7 @@ export const handler = async (event: APIGatewayEvent, context: Context): Promise
         const openai = new OpenAI();
         const image = await openai.images.generate({
             prompt: generatePrompt(event),
-            model: 'dall-e-3',
+            model: 'dall-e-2',
             n: 1,
             size: '512x512',
         });
