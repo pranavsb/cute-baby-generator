@@ -55,10 +55,25 @@ const html_content_prefix =
             font-size: 16px;
             box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
         }
+        .header {
+            padding: 20px;
+            text-align: center;
+            background: #04AA6D;
+            color: white;
+            font-size: 15px;
+            width: 100%;
+        }
+        body {
+            margin: 0;
+        }
     </style>
   </head>
   <body>
     <main>
+      <div class="header">
+        <h1>Cute Baby Generator</h1>
+        <p>because you're bored</p>
+      </div>
       <div style="text-align: center;">
         <img src="`;
 
