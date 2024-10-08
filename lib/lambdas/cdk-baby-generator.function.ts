@@ -35,7 +35,7 @@ const smallAndStructured = ['ornate', 'delicate', 'neat', 'precise',
     'decorative'
 ]
 
-const html_content =
+const html_content_prefix =
 `<!-- For Nav. Never stop obsessing over cute babies - from P <3 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -60,7 +60,9 @@ const html_content =
   <body>
     <main>
       <div style="text-align: center; padding: 5em;">
-        <img src="https://www.educative.io/static/imgs/logos/logoMarkv2.png" alt="a cute baby!">
+        <img src="`;
+
+const html_content_suffix = `" alt="a cute baby!">
       </div>
       <div style="text-align: center; padding: 5em;">
         <a href="https://cutebabygenerator.com"></a>
@@ -103,15 +105,14 @@ export const handler = async (event: APIGatewayEvent, context: Context): Promise
 
     let image_url = '';
     try {
-        image_url = 'https://oaidalleapiprodscus.blob.core.windows.net/private/org-nr3WeWHwrFjVZ6mxQyermNsL/cute-baby-generator/img-XS7A6ebE8yVkmi4vDxdOjLRY.png?st=2024-09-15T00%3A08%3A12Z&se=2024-09-15T02%3A08%3A12Z&sp=r&sv=2024-08-04&sr=b&rscd=inline&rsct=image/png&skoid=d505667d-d6c1-4a0a-bac7-5c84a87759f8&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2024-09-14T23%3A30%3A48Z&ske=2024-09-15T23%3A30%3A48Z&sks=b&skv=2024-08-04&sig=mIf19aq0mrQte7pq%2BmPLK6JrL1dglMMieNQKwfiGdsU%3D';
-        // const openai = new OpenAI();
-        // const image = await openai.images.generate({
-        //     prompt: generatePrompt(event),
-        //     model: 'dall-e-3',
-        //     n: 1,
-        //     size: '1024x1024'
-        // });
-        // image_url = image?.data[0]?.url ?? '';
+        const openai = new OpenAI();
+        const image = await openai.images.generate({
+            prompt: generatePrompt(event),
+            model: 'dall-e-3',
+            n: 1,
+            size: '1024x1024'
+        });
+        image_url = image?.data[0]?.url ?? '';
     } catch (error) {
         console.log(`error calling OpenAI: ${error}`);
         return {
@@ -124,7 +125,7 @@ export const handler = async (event: APIGatewayEvent, context: Context): Promise
     console.log(`Got image URL from OpenAI: ${image_url}`);
     return {
         statusCode: 200,
-        body: html_content,
+        body: html_content_prefix + image_url + html_content_suffix,
         headers: {
             "content-type": "text/html"
         }
