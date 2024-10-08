@@ -65,7 +65,7 @@ const html_content_prefix =
 const html_content_suffix = `" alt="a cute baby!">
       </div>
       <div style="text-align: center; padding: 5em;">
-        <a href="https://cutebabygenerator.com"></a>
+        <a href="https://cutebabygenerator.com">
           <button type="button">Generate cute baby!</button>
         </a>
       </div>
