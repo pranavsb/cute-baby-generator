@@ -72,15 +72,18 @@ const html_content_prefix =
     <main>
       <div class="header">
         <h1>Cute Baby Generator</h1>
-        <p>because you're bored</p>
-      </div>
-      <div style="text-align: center;">
+        <p>because why not?</p>
+      </div>`;
+
+const html_image_prefix = `<div style="text-align: center;">
         <img src="`;
 
-const html_content_suffix = `" alt="a cute baby!" width="400" height="400">
-      </div>
-      <div style="text-align: center; padding: 5em;">
-        <a href="https://cutebabygenerator.com">
+const html_image_suffix = `" alt="a cute baby!" width="400" height="400">
+      </div>`;
+
+const html_content_suffix = `
+      <div style="text-align: center; padding: 2em;">
+        <a href="https://cutebabygenerator.com/get-cute-baby">
           <button type="button">Generate cute baby!</button>
         </a>
       </div>
@@ -88,7 +91,7 @@ const html_content_suffix = `" alt="a cute baby!" width="400" height="400">
   </body>
 </html>`;
 
-function generatePrompt(event: APIGatewayEvent): string {
+function generatePrompt(): string {
     let prompts: string[] = [];
 
     // 1% chance of terrible photos
@@ -117,11 +120,20 @@ function pickRandomProp(obj: { [key: string]: string; } ) {
 
 export const handler = async (event: APIGatewayEvent, context: Context): Promise<APIGatewayProxyResult> => {
     console.log(`Event: ${JSON.stringify(event)}`);
-
+    const generate_baby = event.path.includes('get-cute-baby') ? true : false;
+    if (!generate_baby) {
+        return {
+            statusCode: 200,
+            body: `${html_content_prefix}${html_content_suffix}`,
+            headers: {
+                "content-type": "text/html"
+            }
+        };
+    }
     let image_url = '';
     try {
         const openai = new OpenAI();
-        const prompt = generatePrompt(event);
+        const prompt = generatePrompt();
         console.log(`Using prompt: ${prompt}`);
         const image = await openai.images.generate({
             prompt: prompt,
@@ -142,7 +154,7 @@ export const handler = async (event: APIGatewayEvent, context: Context): Promise
     console.log(`Got image URL from OpenAI: ${image_url}`);
     return {
         statusCode: 200,
-        body: html_content_prefix + image_url + html_content_suffix,
+        body: `${html_content_prefix}${html_image_prefix}${image_url}${html_image_suffix}${html_content_suffix}`,
         headers: {
             "content-type": "text/html"
         }
