@@ -1,4 +1,4 @@
-import { Context, APIGatewayProxyResult, APIGatewayEvent } from 'aws-lambda';
+import { Context, APIGatewayProxyResult, APIGatewayEvent, Handler, APIGatewayProxyEvent } from 'aws-lambda';
 import OpenAI from 'openai';
 
 const babyPrompts = {
@@ -118,9 +118,9 @@ function pickRandomProp(obj: { [key: string]: string; } ) {
     return obj[keys[keys.length * Math.random() << 0]];
 }
 
-export const handler = async (event: APIGatewayEvent, context: Context): Promise<APIGatewayProxyResult> => {
+export const handler: Handler = async (event, context: Context): Promise<APIGatewayProxyResult> => {
     console.log(`Event: ${JSON.stringify(event)}`);
-    const generate_baby = event.path.includes('get-cute-baby') ? true : false;
+    const generate_baby = event['rawPath'].includes('get-cute-baby') ? true : false;
     if (!generate_baby) {
         return {
             statusCode: 200,
