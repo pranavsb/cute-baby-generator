@@ -17,6 +17,29 @@
           display: inline-block;
           font-size: 16px;
           box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+          position: relative;
+        }
+        .button:active {
+          background: #007A63;
+        }
+        .button--loading::after {
+          content: "";
+          position: absolute;
+          width: 16px;
+          height: 16px;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          margin: auto;
+          border: 4px solid transparent;
+          border-top-color: #ffffff;
+          border-radius: 50%;
+          animation: button-loading-spinner 1s ease infinite;
+        }
+        .button--loading .button__text {
+          visibility: hidden;
+          opacity: 0;
         }
         .header {
           padding: 20px;
@@ -28,6 +51,15 @@
         }
         body {
           margin: 0;
+        }
+        @keyframes button-loading-spinner {
+          from {
+              transform: rotate(0turn);
+          }
+
+          to {
+              transform: rotate(1turn);
+          }
         }
     </style>
   </head>
@@ -42,7 +74,9 @@
       </div>
       <div style="text-align: center; padding: 2em;">
         <a href="https://cutebabygenerator.com/get-cute-baby">
-          <button type="button">Generate cute baby!</button>
+          <button type="button" tabindex="0" onclick="this.classList.add('button--loading')">
+            <span class="button__text">Generate cute baby!</span>
+          </button>
         </a>
       </div>
     </main>
