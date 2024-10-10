@@ -170,9 +170,9 @@ export const handler: Handler = async (event, context: Context): Promise<APIGate
         console.log(`Using prompt: ${prompt}`);
         const image = await openai.images.generate({
             prompt: prompt,
-            model: 'dall-e-2',
+            model: 'dall-e-3',
             n: 1,
-            size: '512x512',
+            size: '1024x1024',
         });
         image_url = image?.data[0]?.url ?? '';
     } catch (error) {
