@@ -10,3 +10,5 @@ cdk.out
 .DS_Store
 dist
 bin
+
+.env
