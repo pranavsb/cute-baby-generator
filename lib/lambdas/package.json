@@ -10,7 +10,7 @@
         "typescript": "~5.5.3"
     },
     "dependencies": {
-        "aws-cdk-lib": "2.150.0",
+        "aws-cdk-lib": "2.184.0",
         "openai": "^4.56.0"
     }
 }
